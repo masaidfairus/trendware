@@ -43,11 +43,11 @@ class NewsController extends GetxController {
       articles.assignAll(result);
 
       if (result.isEmpty) {
-        errorMessage('Tidak ada berita tersedia saat ini');
+        errorMessage('No news available for now.');
       }
     } catch (e) {
       errorMessage(
-        'Gagal memuat berita: ${e.toString().replaceAll('Exception: ', '')}',
+        'Failed to load news: ${e.toString().replaceAll('Exception: ', '')}',
       );
       print('Error: $e');
     } finally {
@@ -75,11 +75,11 @@ class NewsController extends GetxController {
       articles.assignAll(result);
 
       if (result.isEmpty) {
-        errorMessage('Tidak ada berita untuk kategori $category');
+        errorMessage('There are no news for this category: $category');
       }
     } catch (e) {
       errorMessage(
-        'Gagal memuat berita kategori: ${e.toString().replaceAll('Exception: ', '')}',
+        'Failed to load this news catefory: ${e.toString().replaceAll('Exception: ', '')}',
       );
       print('Error: $e');
     } finally {
@@ -123,11 +123,11 @@ class NewsController extends GetxController {
       articles.assignAll(result);
 
       if (result.isEmpty) {
-        errorMessage('Tidak ada hasil untuk pencarian "$query"');
+        errorMessage('No result for "$query"');
       }
     } catch (e) {
       errorMessage(
-        'Gagal mencari berita: ${e.toString().replaceAll('Exception: ', '')}',
+        'Failed to search news: ${e.toString().replaceAll('Exception: ', '')}',
       );
       print('Error: $e');
     } finally {
@@ -140,16 +140,16 @@ class NewsController extends GetxController {
     if (isFavorite(article)) {
       favoriteArticles.removeWhere((item) => item.url == article.url);
       Get.snackbar(
-        'Favorit',
-        'Dihapus dari favorit',
+        'Favorite',
+        'Deleted from favorites',
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 2),
       );
     } else {
       favoriteArticles.add(article);
       Get.snackbar(
-        'Favorit',
-        'Ditambahkan ke favorit',
+        'Favorite',
+        'Added to favorites',
         snackPosition: SnackPosition.BOTTOM,
         duration: Duration(seconds: 2),
       );

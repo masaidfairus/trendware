@@ -42,7 +42,7 @@ class DetailPage extends StatelessWidget {
             if (article.urlToImage.isNotEmpty)
               Hero(
                 tag: article.url,
-                child: Container(
+                child: SizedBox(
                   width: double.infinity,
                   height: 250,
                   child: Image.network(
@@ -86,7 +86,7 @@ class DetailPage extends StatelessWidget {
                   // Title
                   Text(
                     article.title,
-                    style: TextStyle(
+                    style: GoogleFonts.lato(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
                       height: 1.3,
@@ -95,47 +95,49 @@ class DetailPage extends StatelessWidget {
                           : Colors.black,
                     ),
                   ),
-                  SizedBox(height: 12),
+                  SizedBox(height: 14),
 
+                  Text(
+                    _formatDate(article.publishedAt),
+                    style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                  ),
+
+                  SizedBox(height: 14),
+
+                  if (article.author.isNotEmpty &&
+                      article.author != 'Unknown Author')
+                    Padding(
+                      padding: EdgeInsets.only(top: 0),
+                      child: Row(
+                        children: [
+                          Text(
+                            article.author,
+                            style: GoogleFonts.lato(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? Colors.white70
+                                  : Colors.black87,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   // Meta info
                   Row(
                     children: [
-                      Icon(Icons.source, size: 16, color: Colors.grey[600]),
-                      SizedBox(width: 4),
                       Expanded(
                         child: Text(
-                          article.source,
+                          'Source: ${article.source}',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.grey[600],
                           ),
                         ),
                       ),
-                      Text(
-                        _formatDate(article.publishedAt),
-                        style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                      ),
                     ],
                   ),
-
-                  if (article.author.isNotEmpty &&
-                      article.author != 'Unknown Author')
-                    Padding(
-                      padding: EdgeInsets.only(top: 8),
-                      child: Row(
-                        children: [
-                          Icon(Icons.person, size: 16, color: Colors.grey[600]),
-                          SizedBox(width: 4),
-                          Text(
-                            'Oleh: ${article.author}',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.grey[600],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
 
                   SizedBox(height: 16),
                   Divider(),
@@ -189,7 +191,7 @@ class DetailPage extends StatelessWidget {
                     ),
 
                   // Read more button
-                  Container(
+                  SizedBox(
                     width: double.infinity,
                     child: ElevatedButton.icon(
                       onPressed: () => _launchURL(article.url),
@@ -213,20 +215,20 @@ class DetailPage extends StatelessWidget {
     try {
       DateTime date = DateTime.parse(dateString);
       List<String> months = [
-        'Jan',
-        'Feb',
-        'Mar',
-        'Apr',
-        'Mei',
-        'Jun',
-        'Jul',
-        'Agu',
-        'Sep',
-        'Okt',
-        'Nov',
-        'Des',
+        'January',
+        'February',
+        'March',
+        'April',
+        'May',
+        'June',
+        'July',
+        'August',
+        'September',
+        'October',
+        'November',
+        'December',
       ];
-      return '${date.day} ${months[date.month - 1]} ${date.year}';
+      return '${months[date.month - 1]} ${date.day}, ${date.year}';
     } catch (e) {
       return dateString;
     }
@@ -240,7 +242,7 @@ class DetailPage extends StatelessWidget {
       } else {
         Get.snackbar(
           'Error',
-          'Tidak dapat membuka link',
+          'Could not launch the article URL',
           snackPosition: SnackPosition.BOTTOM,
         );
       }
@@ -250,8 +252,8 @@ class DetailPage extends StatelessWidget {
   void _shareArticle() {
     // In a real app, you would use share_plus package
     Get.snackbar(
-      'Berbagi',
-      'Fitur berbagi akan segera tersedia',
+      'Share',
+      'Sharing feature is not implemented in this demo.',
       snackPosition: SnackPosition.BOTTOM,
     );
   }

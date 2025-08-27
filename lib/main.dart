@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.white,
             elevation: 2,
           ),
-          textTheme: GoogleFonts.interTextTheme(),
+          textTheme: GoogleFonts.latoTextTheme(),
         ),
         darkTheme: ThemeData(
           brightness: Brightness.dark,
@@ -38,7 +38,7 @@ class MyApp extends StatelessWidget {
             foregroundColor: Colors.white,
             elevation: 2,
           ),
-          textTheme: GoogleFonts.interTextTheme(),
+          textTheme: GoogleFonts.latoTextTheme(),
         ),
         themeMode: themeController.isDarkMode.value
             ? ThemeMode.dark

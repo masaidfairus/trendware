@@ -2,13 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:trendware/pages/favorites_page.dart';
+import 'package:trendware/widgets/complicated_carousel_slider.dart';
 import '../controllers/news_controller.dart';
 import '../controllers/theme_controller.dart';
 import '../widgets/news_card.dart';
 import '../widgets/category_chips.dart';
 import 'search_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
   final NewsController newsController = Get.put(NewsController());
   final ThemeController themeController = Get.find<ThemeController>();
 
@@ -74,7 +80,14 @@ class HomePage extends StatelessWidget {
                     children: [
                       CircularProgressIndicator(),
                       SizedBox(height: 16),
-                      Text('Loading news...'),
+                      Text(
+                        'Loading news...',
+                        style: TextStyle(
+                          color: themeController.isDarkMode.value
+                              ? Colors.white
+                              : Colors.black,
+                        ),
+                      ),
                     ],
                   ),
                 );
@@ -134,9 +147,22 @@ class HomePage extends StatelessWidget {
                 },
                 child: ListView.builder(
                   // padding: EdgeInsets.all(8),
-                  itemCount: newsController.articles.length,
+                  itemCount: newsController.articles.length + 1,
                   itemBuilder: (context, index) {
-                    return NewsCard(article: newsController.articles[index]);
+                    if (index == 0) {
+                      return ComplicatedCarouselSlider(
+                        articles: 
+                          newsController.articles,
+                      );
+                    }
+
+                    final articleIndex = index + 4;
+
+                    if (articleIndex < newsController.articles.length) {
+                      return NewsCard(article: newsController.articles[index]);
+                    }
+
+                    return SizedBox.shrink();
                   },
                 ),
               );

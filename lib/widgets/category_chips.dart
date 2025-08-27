@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/news_controller.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../controllers/theme_controller.dart';
 
-class CategoryChips extends StatelessWidget {
+class CategoryChips extends StatefulWidget {
+  @override
+  State createState() => _CategoryChipsState();
+}
+
+class _CategoryChipsState extends State<CategoryChips> {
   final NewsController controller = Get.find<NewsController>();
+  final ThemeController themeController = Get.find<ThemeController>();
+  bool isSelect = false;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 60,
       child: Obx(
         () => ListView.builder(
@@ -34,14 +42,19 @@ class CategoryChips extends StatelessWidget {
                       style: GoogleFonts.lato(
                         fontWeight: FontWeight.w900,
                         fontSize: 16,
-                        color: Color.fromARGB(255, 30, 58, 138),
+                        // color: Color.fromARGB(255, 30, 58, 138),
+                        color: themeController.isDarkMode.value
+                            ? Colors.white
+                            : Color.fromARGB(255, 30, 58, 138),
                       ),
                     ),
                     SizedBox(width: 10),
                     Container(
                       width: 1,
                       height: 100,
-                      color: Color.fromARGB(255, 30, 58, 138),
+                      color: themeController.isDarkMode.value
+                          ? Colors.white
+                          : Color.fromARGB(255, 30, 58, 138),
                     ),
                     SizedBox(width: 2),
                   ],
@@ -77,6 +90,9 @@ class CategoryChips extends StatelessWidget {
                   if (selected) {
                     controller.fetchNewsByCategory(category.name);
                   }
+                  setState(() {
+                    isSelect = selected;
+                  });
                 },
                 backgroundColor: Colors.grey[200],
                 selectedColor: Color.fromARGB(255, 30, 58, 138),

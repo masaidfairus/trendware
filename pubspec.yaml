@@ -39,6 +39,7 @@ dependencies:
   url_launcher: ^6.2.1
   rename_app: ^1.6.5
   google_fonts: ^6.3.0
+  carousel_slider: ^5.1.1
 
 dev_dependencies:
   flutter_test:

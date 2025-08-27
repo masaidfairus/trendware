@@ -154,7 +154,7 @@ class SearchPage extends StatelessWidget {
             ),
             Expanded(
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 8),
+                padding: EdgeInsets.symmetric(horizontal: 0),
                 itemCount: controller.articles.length,
                 itemBuilder: (context, index) {
                   return NewsCard(article: controller.articles[index]);

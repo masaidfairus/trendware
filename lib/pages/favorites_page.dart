@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 import '../controllers/news_controller.dart';
 import '../widgets/news_card.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -57,7 +58,7 @@ class FavoritesPage extends StatelessWidget {
         }
 
         return ListView.builder(
-          padding: EdgeInsets.all(8),
+          padding: EdgeInsets.all(0),
           itemCount: controller.favoriteArticles.length,
           itemBuilder: (context, index) {
             return NewsCard(
@@ -73,12 +74,24 @@ class FavoritesPage extends StatelessWidget {
   void _showClearAllDialog() {
     Get.dialog(
       AlertDialog(
-        title: Text('Delete all Favorite news'),
+        title: Text(
+          'Delete all Favorite news',
+          style: TextStyle(
+            color: Theme.of(Get.context!).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
+          ),
+        ),
         content: Text(
           'Are you sure you want to delete all favorite news? This action cannot be undone.',
+          style: TextStyle(
+            color: Theme.of(Get.context!).brightness == Brightness.dark
+                ? Colors.white
+                : Colors.black,
+          ),
         ),
         actions: [
-          TextButton(onPressed: () => Get.back(), child: Text('Batal')),
+          TextButton(onPressed: () => Get.back(), child: Text('Cancel')),
           TextButton(
             onPressed: () {
               controller.favoriteArticles.clear();
