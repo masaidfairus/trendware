@@ -5,7 +5,7 @@ import '../models/article.dart';
 
 class NewsService {
   // Ganti dengan API Key Anda dari newsapi.org
-  static const String apiKey = '554e0c2d61484768b556cd9376f0c040';
+  static const String apiKey = '0ee0f1145d3d4bdb99b3675225f5da6f';
   static const String baseUrl = 'https://newsapi.org/v2';
 
   // Proxy URL untuk web (opsional - jika Anda membuat backend proxy)
@@ -41,7 +41,7 @@ class NewsService {
   // Method untuk mendapatkan top headlines
   static Future<List<Article>> getTopHeadlines({String country = 'us'}) async {
     try {
-      final String endpoint = '/top-headlines?country=$country&apiKey=$apiKey';
+      final String endpoint = '/everything?q=technology&apiKey=$apiKey';
       final String url = _getApiUrl(endpoint);
 
       print('Requesting URL: $url');
@@ -100,8 +100,38 @@ class NewsService {
   // Method untuk mendapatkan berita berdasarkan kategori
   static Future<List<Article>> getNewsByCategory(String category) async {
     try {
+      // 🔹 Tambahkan pengecekan untuk custom subkategori tech
+      final Map<String, String> techSubcategories = {
+        "ai":
+            "artificial intelligence OR AI OR machine learning OR deep learning",
+        "programming":
+            "programming OR coding OR software development OR developer",
+        "network": "network OR 5G OR cybersecurity OR cloud computing OR cisco OR mikrotik",
+        "business_tech": "business technology OR fintech OR digital economy",
+        "gadgets": "gadgets OR smartphone OR device OR wearables",
+        "apps": "apps OR mobile apps OR application OR software",
+        "cloud": "cloud computing OR SaaS OR IaaS OR PaaS",
+        "gaming": "gaming OR video games OR e-sports OR gamers OR game",
+        "cybersecurity":
+            "cybersecurity OR hacking OR data breach OR ransomware",
+        "space": "space OR satellite OR nasa OR spacex",
+        "automotive": "automotive OR electric vehicles OR EV OR self-driving",
+        "green-tech":
+            "green technology OR renewable energy OR climate tech OR sustainability",
+        "ar-vr": "augmented reality OR virtual reality OR AR OR VR OR metaverse",
+        "crypto":
+            "cryptocurrency OR blockchain OR bitcoin OR ethereum OR DeFi",
+        "robotics": "robotics OR automation OR drones OR industrial robots",
+      };
+
+      if (techSubcategories.containsKey(category.toLowerCase())) {
+        // Kalau kategori custom → gunakan searchNews()
+        return await searchNews(techSubcategories[category.toLowerCase()]!);
+      }
+
+      // 🔹 Default: kategori bawaan NewsAPI (business, technology, science, etc.)
       final String endpoint =
-          '/top-headlines?country=us&category=$category&apiKey=$apiKey';
+          '/everything?q=$category&apiKey=$apiKey';
       final String url = _getApiUrl(endpoint);
 
       final response = await http

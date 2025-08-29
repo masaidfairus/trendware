@@ -38,6 +38,9 @@ class _HomePageState extends State<HomePage> {
                     themeController.isDarkMode.value
                         ? Icons.light_mode
                         : Icons.dark_mode,
+                    color: themeController.isDarkMode.value
+                        ? Colors.white70
+                        : Colors.black87,
                   ),
                   SizedBox(width: 8),
                   Text(

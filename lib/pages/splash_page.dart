@@ -50,8 +50,8 @@ class _SplashPageState extends State<SplashPage>
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'TrendWare.',
-                style: GoogleFonts.lato(
+                'trendware.',
+                style: GoogleFonts.plusJakartaSans(
                   fontSize: 48,
                   fontWeight: FontWeight.w700,
                   color: Colors.white

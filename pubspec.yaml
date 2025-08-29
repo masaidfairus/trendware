@@ -40,6 +40,7 @@ dependencies:
   rename_app: ^1.6.5
   google_fonts: ^6.3.0
   carousel_slider: ^5.1.1
+  flutter_dotenv: ^6.0.0
 
 dev_dependencies:
   flutter_test:

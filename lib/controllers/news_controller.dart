@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../models/article.dart';
 import '../models/news_category.dart';
@@ -9,7 +10,7 @@ class NewsController extends GetxController {
   var articles = <Article>[].obs;
   var favoriteArticles = <Article>[].obs;
   var errorMessage = ''.obs;
-  var selectedCategory = 'general'.obs;
+  var selectedCategory = 'technology'.obs;
   var categories = <NewsCategory>[].obs;
   var searchQuery = ''.obs;
   var isSearching = false.obs;
@@ -55,7 +56,7 @@ class NewsController extends GetxController {
     }
   }
 
-  // Fetch news by category - dengan fallback
+// Fetch news by category - dengan support subkategori
   Future<void> fetchNewsByCategory(String category) async {
     try {
       isLoading(true);
@@ -64,12 +65,12 @@ class NewsController extends GetxController {
 
       List<Article> result;
       try {
+        // 🔹 Sekarang langsung panggil NewsService
         result = await NewsService.getNewsByCategory(category);
       } catch (e) {
         print('Category news failed, trying search: $e');
-        // Fallback to search dengan kata kunci kategori
-        String searchTerm = _getCategorySearchTerm(category);
-        result = await NewsService.searchNews(searchTerm);
+        // 🔹 Fallback → search pakai nama kategori langsung
+        result = await NewsService.searchNews(category);
       }
 
       articles.assignAll(result);
@@ -79,7 +80,7 @@ class NewsController extends GetxController {
       }
     } catch (e) {
       errorMessage(
-        'Failed to load this news catefory: ${e.toString().replaceAll('Exception: ', '')}',
+        'Failed to load this news category: ${e.toString().replaceAll('Exception: ', '')}',
       );
       print('Error: $e');
     } finally {
@@ -88,24 +89,24 @@ class NewsController extends GetxController {
   }
 
   // Helper untuk convert category ke search term
-  String _getCategorySearchTerm(String category) {
-    switch (category) {
-      case 'business':
-        return 'business finance economy';
-      case 'entertainment':
-        return 'entertainment celebrity movies';
-      case 'health':
-        return 'health medical healthcare';
-      case 'science':
-        return 'science technology research';
-      case 'sports':
-        return 'sports football basketball';
-      case 'technology':
-        return 'technology tech innovation';
-      default:
-        return 'news general';
-    }
-  }
+  // String _getCategorySearchTerm(String category) {
+  //   switch (category) {
+  //     case 'business':
+  //       return 'business finance economy';
+  //     case 'entertainment':
+  //       return 'entertainment celebrity movies';
+  //     case 'health':
+  //       return 'health medical healthcare';
+  //     case 'science':
+  //       return 'science technology research';
+  //     case 'sports':
+  //       return 'sports football basketball';
+  //     case 'technology':
+  //       return 'technology tech innovation';
+  //     default:
+  //       return 'news general';
+  //   }
+  // }
 
   // Search news
   Future<void> searchNews(String query) async {

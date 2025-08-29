@@ -1,6 +1,6 @@
 {
-     "name": "TrendWare",
-     "short_name": "TrendWare",
+     "name": "trendware",
+     "short_name": "trendware",
      "start_url": ".",
      "display": "standalone",
      "background_color": "#0175C2",

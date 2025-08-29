@@ -163,18 +163,18 @@ class DetailPage extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          'Content:',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600,
-                            color:
-                                Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white70
-                                : Colors.black87,
-                          ),
-                        ),
-                        SizedBox(height: 8),
+                        // Text(
+                        //   'Content:',
+                        //   style: TextStyle(
+                        //     fontSize: 18,
+                        //     fontWeight: FontWeight.w600,
+                        //     color:
+                        //         Theme.of(context).brightness == Brightness.dark
+                        //         ? Colors.white70
+                        //         : Colors.black87,
+                        //   ),
+                        // ),
+                        // SizedBox(height: 8),
                         Text(
                           article.content,
                           style: TextStyle(
@@ -196,7 +196,7 @@ class DetailPage extends StatelessWidget {
                     child: ElevatedButton.icon(
                       onPressed: () => _launchURL(article.url),
                       icon: Icon(Icons.open_in_browser),
-                      label: Text('Baca Selengkapnya'),
+                      label: Text('Read Full Article'),
                       style: ElevatedButton.styleFrom(
                         padding: EdgeInsets.symmetric(vertical: 16),
                       ),
