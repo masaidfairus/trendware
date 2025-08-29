@@ -2,8 +2,8 @@
 
 A news app about Technology 
 
-## Download this app
-[text](https://drive.google.com/file/d/1sStTebOq41xRKOdoDZQRcvHsRIDRd6y4/view?usp=sharing)
+## Download the app
+[DOWNLOAD HERE!!!](https://drive.google.com/file/d/1sStTebOq41xRKOdoDZQRcvHsRIDRd6y4/view?usp=sharing)
 
 ## Getting Started
 
