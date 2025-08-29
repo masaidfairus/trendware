@@ -1,6 +1,9 @@
-# flutter_application_7
+# trendware
 
-A new Flutter project.
+A news app about Technology 
+
+## Download this app
+[text](https://drive.google.com/file/d/1sStTebOq41xRKOdoDZQRcvHsRIDRd6y4/view?usp=sharing)
 
 ## Getting Started
 
